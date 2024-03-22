@@ -53,7 +53,7 @@ public extension MapView {
     ///   - onTapChanged: Emits the context whenever the gesture changes (e.g. began, ended, etc).
     /// - Returns: The modified map view.
     func onTapMapGesture(count: Int = 1,
-                         onTapChanged: @escaping (MapGestureContext) -> Void) -> MapView
+                         onTapChanged: @escaping (MapGestureContext, MLNMapView) -> Void) -> MapView
     {
         var newMapView = self
 
@@ -72,7 +72,7 @@ public extension MapView {
     ///   - onPressChanged: Emits the context whenever the gesture changes (e.g. began, ended, etc).
     /// - Returns: The modified map view.
     func onLongPressMapGesture(minimumDuration: Double = 0.5,
-                               onPressChanged: @escaping (MapGestureContext) -> Void) -> MapView
+                               onPressChanged: @escaping (MapGestureContext, MLNMapView) -> Void) -> MapView
     {
         var newMapView = self
 

@@ -1,4 +1,5 @@
 import UIKit
+import MapLibre
 
 public class MapGesture: NSObject {
     public enum Method: Equatable {
@@ -19,17 +20,19 @@ public class MapGesture: NSObject {
     let method: Method
 
     /// The onChange action that runs when the gesture changes on the map view.
-    let onChange: (MapGestureContext) -> Void
+    let onChange: (MapGestureContext, MLNMapView) -> Void
 
     /// The underlying gesture recognizer
     weak var gestureRecognizer: UIGestureRecognizer?
+	
+	weak var mapView: MLNMapView?
 
     /// Create a new gesture recognizer definition for the MapView
     ///
     /// - Parameters:
     ///   - method: The gesture recognizer method
     ///   - onChange: The action to perform when the gesture is changed
-    init(method: Method, onChange: @escaping (MapGestureContext) -> Void) {
+	init(method: Method, onChange: @escaping (MapGestureContext, MLNMapView) -> Void) {
         self.method = method
         self.onChange = onChange
     }

@@ -10,6 +10,8 @@ extension MapView {
     ///   - context: The UIViewRepresentable context that will orchestrate the response sender
     ///   - gesture: The gesture definition.
     @MainActor func registerGesture(_ mapView: MLNMapView, _ context: Context, gesture: MapGesture) {
+		gesture.mapView = mapView
+		
         switch gesture.method {
         case let .tap(numberOfTaps: numberOfTaps):
             let gestureRecognizer = UITapGestureRecognizer(target: context.coordinator,
@@ -50,7 +52,7 @@ extension MapView {
         // Process the gesture into a context response.
         let context = processContextFromGesture(mapView, gesture: gesture, sender: sender)
         // Run the context through the gesture held on the MapView (emitting to the MapView modifier).
-        gesture.onChange(context)
+        gesture.onChange(context, mapView)
     }
 
     /// Convert the sender data into a MapGestureContext
